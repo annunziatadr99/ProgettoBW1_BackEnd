@@ -7,29 +7,30 @@ import java.util.Date;
 
 @Entity
 public class Abbonamento {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, unique = true)
-    private String code;
+    private String codice;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Periodicita periodicita;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataEmissione;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataScadenza;
 
     @ManyToOne
-    private Utente utente;
+    @JoinColumn(name = "utente_id")
+    private Utente utente; // Ensure this property exists
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -38,12 +39,12 @@ public class Abbonamento {
         this.id = id;
     }
 
-    public String getCode() {
-        return code;
+    public String getCodice() {
+        return codice;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setCodice(String codice) {
+        this.codice = codice;
     }
 
     public Periodicita getPeriodicita() {

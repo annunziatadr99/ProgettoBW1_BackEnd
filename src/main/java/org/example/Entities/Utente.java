@@ -2,6 +2,7 @@ package org.example.Entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Utente {
@@ -11,21 +12,22 @@ public class Utente {
     private Long id;
 
     @Column(nullable = false)
-    private String Nome;
+    private String nome;
 
     @Column(nullable = false, unique = true)
-    private String NumeroTessera;
+    private String numeroTessera;
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date dataScadenzaTessera;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "utente")
     private List<Biglietto> biglietti;
 
-    @OneToMany(mappedBy = "user")
-    private List<Abbonamento> abbonamenti;
+    @OneToMany(mappedBy = "utente")
+    private List<Abbonamento> abbonamenti; // Ensure this property references the correct field in Abbonamento
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -35,19 +37,19 @@ public class Utente {
     }
 
     public String getNome() {
-        return Nome;
+        return nome;
     }
 
     public void setNome(String nome) {
-        Nome = nome;
+        this.nome = nome;
     }
 
     public String getNumeroTessera() {
-        return NumeroTessera;
+        return numeroTessera;
     }
 
     public void setNumeroTessera(String numeroTessera) {
-        NumeroTessera = numeroTessera;
+        this.numeroTessera = numeroTessera;
     }
 
     public Date getDataScadenzaTessera() {

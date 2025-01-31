@@ -10,20 +10,21 @@ public class Rotta {
     private Long id;
 
     @Column(nullable = false)
-    private String Partenza;
+    private String partenza;
 
     @Column(nullable = false)
-    private String Arrivo;
+    private String arrivo;
 
     @Column(nullable = false)
-    private int Tempoviaggioprevisto;
+    private int tempoViaggioPrevisto;
 
-    @OneToMany(mappedBy = "Rotta")
-    private List<Veicolo> veicoli;
+    @OneToMany(mappedBy = "rotta")
+    private List<RegistroViaggio> registroViaggiatori;
 
-    @OneToMany(mappedBy = "Rotta")
-    private List<RegistroViaggio> RegistroViaggiatori;
+    @OneToMany(mappedBy = "rotta")
+    private List<Veicolo> veicoli;  // Ensure this property references the correct field in Veicolo
 
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -33,27 +34,35 @@ public class Rotta {
     }
 
     public String getPartenza() {
-        return Partenza;
+        return partenza;
     }
 
     public void setPartenza(String partenza) {
-        Partenza = partenza;
+        this.partenza = partenza;
     }
 
     public String getArrivo() {
-        return Arrivo;
+        return arrivo;
     }
 
     public void setArrivo(String arrivo) {
-        Arrivo = arrivo;
+        this.arrivo = arrivo;
     }
 
-    public int getTempoviaggioprevisto() {
-        return Tempoviaggioprevisto;
+    public int getTempoViaggioPrevisto() {
+        return tempoViaggioPrevisto;
     }
 
-    public void setTempoviaggioprevisto(int tempoviaggioprevisto) {
-        Tempoviaggioprevisto = tempoviaggioprevisto;
+    public void setTempoViaggioPrevisto(int tempoViaggioPrevisto) {
+        this.tempoViaggioPrevisto = tempoViaggioPrevisto;
+    }
+
+    public List<RegistroViaggio> getRegistroViaggiatori() {
+        return registroViaggiatori;
+    }
+
+    public void setRegistroViaggiatori(List<RegistroViaggio> registroViaggiatori) {
+        this.registroViaggiatori = registroViaggiatori;
     }
 
     public List<Veicolo> getVeicoli() {
@@ -62,13 +71,5 @@ public class Rotta {
 
     public void setVeicoli(List<Veicolo> veicoli) {
         this.veicoli = veicoli;
-    }
-
-    public List<RegistroViaggio> getRegistroViaggiatori() {
-        return RegistroViaggiatori;
-    }
-
-    public void setRegistroViaggiatori(List<RegistroViaggio> registroViaggiatori) {
-        RegistroViaggiatori = registroViaggiatori;
     }
 }

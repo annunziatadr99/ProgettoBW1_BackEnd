@@ -14,7 +14,7 @@ public class Veicolo {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoVeicolo type;
+    private TipoVeicolo tipo;
 
     @Column(nullable = false)
     private int capacita;
@@ -22,12 +22,17 @@ public class Veicolo {
     @Column(nullable = false)
     private boolean inServizio;
 
-    @OneToMany(mappedBy = "Veicolo")
+    @OneToMany(mappedBy = "veicolo")
     private List<Biglietto> biglietti;
 
-    @OneToMany(mappedBy = "Veicolo")
-    private List<RegistroViaggio> RegistroViaggiatori;
+    @OneToMany(mappedBy = "veicolo")
+    private List<RegistroViaggio> registroViaggiatori;
 
+    @ManyToOne
+    @JoinColumn(name = "rotta_id")
+    private Rotta rotta;  // Ensure this property exists and is correctly named
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -36,12 +41,12 @@ public class Veicolo {
         this.id = id;
     }
 
-    public TipoVeicolo getType() {
-        return type;
+    public TipoVeicolo getTipo() {
+        return tipo;
     }
 
-    public void setType(TipoVeicolo type) {
-        this.type = type;
+    public void setTipo(TipoVeicolo tipo) {
+        this.tipo = tipo;
     }
 
     public int getCapacita() {
@@ -69,10 +74,18 @@ public class Veicolo {
     }
 
     public List<RegistroViaggio> getRegistroViaggiatori() {
-        return RegistroViaggiatori;
+        return registroViaggiatori;
     }
 
     public void setRegistroViaggiatori(List<RegistroViaggio> registroViaggiatori) {
-        RegistroViaggiatori = registroViaggiatori;
+        this.registroViaggiatori = registroViaggiatori;
+    }
+
+    public Rotta getRotta() {
+        return rotta;
+    }
+
+    public void setRotta(Rotta rotta) {
+        this.rotta = rotta;
     }
 }

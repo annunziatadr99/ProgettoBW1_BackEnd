@@ -1,36 +1,35 @@
 package org.example.DAO;
 
-import org.example.Entities.Utente;
+import org.example.Entities.Biglietto;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class UtenteDAO {
+public class BigliettoDAO {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProgettoBW1_BackEnd");
 
-    public void save(Utente utente) {
+    public void save(Biglietto biglietto) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(utente);
+        em.persist(biglietto);
         em.getTransaction().commit();
         em.close();
     }
 
-    public Utente findById(Long id) {
+    public Biglietto findById(Long id) {
         EntityManager em = emf.createEntityManager();
-        Utente utente = em.find(Utente.class, id);
+        Biglietto biglietto = em.find(Biglietto.class, id);
         em.close();
-        return utente;
+        return biglietto;
     }
 
-    public List<Utente> findAll() {
+    public List<Biglietto> findAll() {
         EntityManager em = emf.createEntityManager();
-        // Corrected the query syntax
-        List<Utente> utenti = em.createQuery("SELECT u FROM Utente u", Utente.class).getResultList();
+        List<Biglietto> biglietti = em.createQuery("SELEZIONA b PER Biglietto b", Biglietto.class).getResultList();
         em.close();
-        return utenti;
+        return biglietti;
     }
 }

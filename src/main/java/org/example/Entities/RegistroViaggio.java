@@ -5,24 +5,26 @@ import java.util.Date;
 
 @Entity
 public class RegistroViaggio {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
-    private Date DataViaggio;
+    private Date dataViaggio;
 
     @Column(nullable = false)
-    private int TempoViaggioEffetivo;
+    private int tempoViaggioEffetivo;
 
     @ManyToOne
+    @JoinColumn(name = "rotta_id")
+    private Rotta rotta;
+
+    @ManyToOne
+    @JoinColumn(name = "veicolo_id")
     private Veicolo veicolo;
 
-    @ManyToOne
-    private Rotta route;
-
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -32,19 +34,27 @@ public class RegistroViaggio {
     }
 
     public Date getDataViaggio() {
-        return DataViaggio;
+        return dataViaggio;
     }
 
     public void setDataViaggio(Date dataViaggio) {
-        DataViaggio = dataViaggio;
+        this.dataViaggio = dataViaggio;
     }
 
     public int getTempoViaggioEffetivo() {
-        return TempoViaggioEffetivo;
+        return tempoViaggioEffetivo;
     }
 
     public void setTempoViaggioEffetivo(int tempoViaggioEffetivo) {
-        TempoViaggioEffetivo = tempoViaggioEffetivo;
+        this.tempoViaggioEffetivo = tempoViaggioEffetivo;
+    }
+
+    public Rotta getRotta() {
+        return rotta;
+    }
+
+    public void setRotta(Rotta rotta) {
+        this.rotta = rotta;
     }
 
     public Veicolo getVeicolo() {
@@ -53,13 +63,5 @@ public class RegistroViaggio {
 
     public void setVeicolo(Veicolo veicolo) {
         this.veicolo = veicolo;
-    }
-
-    public Rotta getRoute() {
-        return route;
-    }
-
-    public void setRoute(Rotta route) {
-        this.route = route;
     }
 }

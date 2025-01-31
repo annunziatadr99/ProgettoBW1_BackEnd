@@ -5,7 +5,6 @@ import java.util.Date;
 
 @Entity
 public class Biglietto {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,24 +13,29 @@ public class Biglietto {
     private String codice;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date dataEmissione;
 
     @Column(nullable = false)
     private boolean validita;
 
     @ManyToOne
-    private Utente utente;
-
-    @ManyToOne
-    private Veicolo veicolo;
-
-    @ManyToOne
+    @JoinColumn(name = "distributore_automatico_id")
     private DistributoreAutomatico distributoreAutomatico;
 
     @ManyToOne
+    @JoinColumn(name = "rivenditore_autorizzato_id")
     private RivenditoreAutorizzato rivenditoreAutorizzato;
 
+    @ManyToOne
+    @JoinColumn(name = "utente_id")
+    private Utente utente;
+
+    @ManyToOne
+    @JoinColumn(name = "veicolo_id")
+    private Veicolo veicolo;
+
+    // Getters and setters
     public Long getId() {
         return id;
     }
@@ -64,22 +68,6 @@ public class Biglietto {
         this.validita = validita;
     }
 
-    public Utente getUtente() {
-        return utente;
-    }
-
-    public void setUtente(Utente utente) {
-        this.utente = utente;
-    }
-
-    public Veicolo getVeicolo() {
-        return veicolo;
-    }
-
-    public void setVeicolo(Veicolo veicolo) {
-        this.veicolo = veicolo;
-    }
-
     public DistributoreAutomatico getDistributoreAutomatico() {
         return distributoreAutomatico;
     }
@@ -94,5 +82,21 @@ public class Biglietto {
 
     public void setRivenditoreAutorizzato(RivenditoreAutorizzato rivenditoreAutorizzato) {
         this.rivenditoreAutorizzato = rivenditoreAutorizzato;
+    }
+
+    public Utente getUtente() {
+        return utente;
+    }
+
+    public void setUtente(Utente utente) {
+        this.utente = utente;
+    }
+
+    public Veicolo getVeicolo() {
+        return veicolo;
+    }
+
+    public void setVeicolo(Veicolo veicolo) {
+        this.veicolo = veicolo;
     }
 }

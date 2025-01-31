@@ -1,36 +1,35 @@
 package org.example.DAO;
 
-import org.example.Entities.Utente;
+import org.example.Entities.Rotta;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public class UtenteDAO {
+public class RottaDAO {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("ProgettoBW1_BackEnd");
 
-    public void save(Utente utente) {
+    public void save(Rotta rotta) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        em.persist(utente);
+        em.persist(rotta);
         em.getTransaction().commit();
         em.close();
     }
 
-    public Utente findById(Long id) {
+    public Rotta findById(Long id) {
         EntityManager em = emf.createEntityManager();
-        Utente utente = em.find(Utente.class, id);
+        Rotta rotta = em.find(Rotta.class, id);
         em.close();
-        return utente;
+        return rotta;
     }
 
-    public List<Utente> findAll() {
+    public List<Rotta> findAll() {
         EntityManager em = emf.createEntityManager();
-        // Corrected the query syntax
-        List<Utente> utenti = em.createQuery("SELECT u FROM Utente u", Utente.class).getResultList();
+        List<Rotta> routes = em.createQuery("SELEZIONA r PER Rotta r", Rotta.class).getResultList();
         em.close();
-        return utenti;
+        return routes;
     }
 }

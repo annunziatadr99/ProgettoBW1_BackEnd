@@ -13,9 +13,9 @@ public class DistributoreAutomatico {
     private String locazione;
 
     @Column(nullable = false)
-    private boolean Attivo;
+    private boolean attivo;
 
-    @OneToMany(mappedBy = "DistributoreAutomatico")
+    @OneToMany(mappedBy = "distributoreAutomatico")
     private List<Biglietto> biglietti;
 
     public Long getId() {
@@ -35,11 +35,11 @@ public class DistributoreAutomatico {
     }
 
     public boolean isAttivo() {
-        return Attivo;
+        return attivo;
     }
 
     public void setAttivo(boolean attivo) {
-        Attivo = attivo;
+        this.attivo = attivo;
     }
 
     public List<Biglietto> getBiglietti() {
